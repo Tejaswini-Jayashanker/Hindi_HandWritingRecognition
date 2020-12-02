@@ -56,16 +56,16 @@ def keras_process_image(img):
 
 
 cap = cv2.VideoCapture(0)
-Lower_green = np.array([110, 50, 50])
-Upper_green = np.array([130, 255, 255])
+Lower_blue = np.array([110, 50, 50])
+Upper_blue = np.array([130, 255, 255])
 pred_class=0
 pts = deque(maxlen=512)
 blackboard = np.zeros((480, 640, 3), dtype=np.uint8)
 digit = np.zeros((200, 200, 3), dtype=np.uint8)
 while (cap.isOpened()):
-    ret, img = cap.read()
-    img = cv2.flip(img, 1)
-    imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    ret, image = cap.read()
+    img = cv2.flip(image, 1)
+    imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(imgHSV, Lower_green, Upper_green)
     blur = cv2.medianBlur(mask, 15)
     blur = cv2.GaussianBlur(blur, (5, 5), 0)
